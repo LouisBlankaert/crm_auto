@@ -1,0 +1,117 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum VehicleStatus {
+  AVAILABLE
+  SOLD
+  RESERVED
+  IN_STOCK
+}
+
+enum ReminderStatus {
+  TODO
+  DONE
+  POSTPONED
+}
+
+model Vehicle {
+  id          String        @id @default(cuid())
+  make        String
+  model       String
+  year        Int
+  mileage     Int
+  price       Float?
+  description String?
+  imageUrl    String?
+  fuel        String?
+  transmission String?
+  power       String?
+  source      String?
+  status      VehicleStatus @default(AVAILABLE)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  sellerId    String?
+  seller      Seller?       @relation(fields: [sellerId], references: [id])
+  buyerId     String?
+  buyer       Buyer?        @relation(fields: [buyerId], references: [id])
+  adId        String?       @unique
+  sourceUrl   String?       @unique
+
+  @@index([sellerId])
+  @@index([buyerId])
+}
+
+model Seller {
+  id          String     @id @default(cuid())
+  firstName   String?
+  lastName    String?
+  email       String?    @unique
+  phone       String?
+  address     String?
+  isPotential Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  vehicles    Vehicle[]
+  reminders   Reminder[]
+  interactions Interaction[]
+}
+
+model Buyer {
+  id             String     @id @default(cuid())
+  firstName      String
+  lastName       String
+  email          String?    @unique
+  phone          String
+  address        String?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  vehicleInterest String?
+  vehicles       Vehicle[]
+  reminders      Reminder[]
+  interactions   Interaction[]
+}
+
+model Reminder {
+  id          String         @id @default(cuid())
+  date        DateTime
+  reason      String
+  notes       String?
+  status      ReminderStatus @default(TODO)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  sellerId    String?
+  seller      Seller?        @relation(fields: [sellerId], references: [id])
+  buyerId     String?
+  buyer       Buyer?         @relation(fields: [buyerId], references: [id])
+
+  @@index([sellerId])
+  @@index([buyerId])
+}
+
+model Interaction {
+  id          String    @id @default(cuid())
+  date        DateTime  @default(now())
+  notes       String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sellerId    String?
+  seller      Seller?   @relation(fields: [sellerId], references: [id])
+  buyerId     String?
+  buyer       Buyer?    @relation(fields: [buyerId], references: [id])
+
+  @@index([sellerId])
+  @@index([buyerId])
+}
