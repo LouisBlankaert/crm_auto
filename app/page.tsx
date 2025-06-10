@@ -51,43 +51,7 @@ export default async function Dashboard() {
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <section>
-          <div className="flex items-center justify-between mb-4 bg-gradient-to-r from-blue-500 to-blue-600 p-3 rounded-t-lg shadow-sm">
-            <h2 className="text-xl font-semibold text-white">Derniers clients vendeurs</h2>
-            <Link href="/sellers" className="bg-white text-blue-600 hover:bg-blue-50 px-3 py-1 rounded-md transition-colors duration-200 text-sm font-medium">Voir tous</Link>
-          </div>
-          <Card>
-            <CardContent className="p-0">
-              <div className="p-4 border-b">Aucun client vendeur pour le moment</div>
-            </CardContent>
-          </Card>
-        </section>
 
-        <section>
-          <div className="flex items-center justify-between mb-4 bg-gradient-to-r from-purple-500 to-purple-600 p-3 rounded-t-lg shadow-sm">
-            <h2 className="text-xl font-semibold text-white">Derniers clients acheteurs</h2>
-            <Link href="/buyers" className="bg-white text-purple-600 hover:bg-purple-50 px-3 py-1 rounded-md transition-colors duration-200 text-sm font-medium">Voir tous</Link>
-          </div>
-          <Card>
-            <CardContent className="p-0">
-              <div className="p-4 border-b">Aucun client acheteur pour le moment</div>
-            </CardContent>
-          </Card>
-        </section>
-      </div>
-
-      <section className="mt-6">
-        <div className="flex items-center justify-between mb-4 bg-gradient-to-r from-orange-500 to-orange-600 p-3 rounded-t-lg shadow-sm">
-          <h2 className="text-xl font-semibold text-white">Rappels clients à venir</h2>
-          <Link href="/reminders" className="bg-white text-orange-600 hover:bg-orange-50 px-3 py-1 rounded-md transition-colors duration-200 text-sm font-medium">Voir tous</Link>
-        </div>
-        <Card>
-          <CardContent className="p-0">
-            <div className="p-4 border-b">Aucun rappel programmé pour le moment</div>
-          </CardContent>
-        </Card>
-      </section>
     </main>
   );
 }
