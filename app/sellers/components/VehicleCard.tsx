@@ -31,7 +31,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
     >
       <div className="bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md">
         {/* Image du véhicule avec proportions optimisées */}
-        <div className="relative w-full h-48 overflow-hidden bg-gray-100">
+        <div className="relative w-full h-64 overflow-hidden bg-gray-100">
           {vehicle.imageUrl ? (
             <img 
               src={vehicle.imageUrl} 

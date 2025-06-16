@@ -46,6 +46,9 @@ export default function RootLayout({
                 <Link href="/buyers" className="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md">
                   Acheteurs
                 </Link>
+                <Link href="/vehicles" className="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md">
+                  Stock
+                </Link>
                 <Link href="/reminders" className="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md">
                   Rappels
                 </Link>
